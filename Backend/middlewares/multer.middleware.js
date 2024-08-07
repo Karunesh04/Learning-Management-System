@@ -16,7 +16,7 @@ const upload = multer({
       ext !== ".jpg" &&
       ext !== ".jpeg" &&
       ext !== ".webp" &&
-      ext !== "png" &&
+      ext !== ".png" &&
       ext !== ".mp4"
     ) {
       cb(new Error(`Unsupported file type! ${ext}`), false);
@@ -27,4 +27,4 @@ const upload = multer({
   },
 });
 
-export default upload
+export default upload;

@@ -44,6 +44,10 @@ const userSchema = new Schema(
     },
     forgotPasswordToken: String,
     forgotPasswordExpiry: Date,
+    subscription: {
+      id: String,
+      status: String
+    }
   },
   {
     timestamps: true,
@@ -61,7 +65,7 @@ userSchema.methods = {
   comparePassword: async function (plainTextPassword) {
     return await bcrypt.compare(plainTextPassword, this.password);
   },
-  generateJWTToken: async function () {
+  generateJWTToken: function () {
     return jwt.sign(
       {
         id: this._id,
@@ -80,7 +84,6 @@ userSchema.methods = {
 
     this.forgotPasswordToken = crypto.createHash('sha256').update(resetToken).digest('hex')
     this.forgotPasswordExpiry = Date.now() + 15*60+1000 //15 min from now
-
     return resetToken
   }
 };
