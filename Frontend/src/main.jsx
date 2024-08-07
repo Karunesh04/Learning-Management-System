@@ -1,12 +1,14 @@
-import './index.css'
+import "./index.css";
 
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { Toaster } from "react-hot-toast";
 
-import App from './App.jsx'
+import App from "./App.jsx";
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>,
-)
+    <Toaster />
+  </React.StrictMode>
+);
