@@ -29,7 +29,7 @@ export default function Home() {
             </Link>
           </div>
         </div>
-        <div className="w-1/2 flex items-center justofy-center">
+        <div className="w-1/2 flex items-center justify-center">
           <img src={homePageMainImage} alt="home page"/>
         </div>
       </div>
