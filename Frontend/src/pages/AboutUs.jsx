@@ -3,7 +3,7 @@ import apj from "../assets/Images/apj.png";
 import einstein from "../assets/Images/einstein.png";
 import nelsonMandela from "../assets/Images/nelsonMandela.png";
 import steveJobs from "../assets/Images/steveJobs.png";
-import { HomeLayout } from "../layouts/homeLayout";
+import HomeLayout from "../layouts/HomeLayout";
 
 export default function AboutUs() {
   return (

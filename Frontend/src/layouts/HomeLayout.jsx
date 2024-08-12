@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Footer } from "../components/Footer";
 import { logout } from "../slices/authSlice";
 
-export function HomeLayout({ children }) {
+export default function HomeLayout({ children }) {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
