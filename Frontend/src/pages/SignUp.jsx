@@ -79,7 +79,7 @@ function Signup() {
     const response = await dispatch(createAccount(formData));
     console.log(response);
     if (response?.payload?.data) {
-      navigate("/");
+      navigate("/signin");
     }
     setSignupDetails({
       email: "",
@@ -167,7 +167,7 @@ function Signup() {
           </button>
           <p className="text-center">
             Already have an account ?{" "}
-            <Link to="/login" className="cusror-pointer text-accent">
+            <Link to="/signin" className="cusror-pointer text-accent">
               Login
             </Link>
           </p>
