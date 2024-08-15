@@ -23,7 +23,7 @@ export default function CourseCard({data}){
                         Instrucutor: <span className="font-bold text-yellow-500">{data?.createdBy}</span>
                     </p>
                     <p className="font-semibold">
-                        Total Lectures: <span className="font-bold text-yellow-500">{data?.numberOfLectures}</span>
+                        Total Lectures: <span className="font-bold text-yellow-500">{data?.nummberOfLectures}</span>
                     </p>
                 </div>
 
