@@ -25,12 +25,13 @@ export default function HomeLayout({ children }) {
     drawerSide[0].style.width = "auto";
   }
 
-  function onLogout(e) {
+  async function onLogout(e) {
     e.preventDefault();
     
-    const response = dispatch(logout());
-    if(response?.payload?.data)
+    const response = await dispatch(logout());
+    if(response?.payload?.data){
       navigate("/");
+    }
   }
 
   return (
@@ -60,6 +61,11 @@ export default function HomeLayout({ children }) {
             {isLoggedIn && role === "ADMIN" && (
               <li>
                 <Link to="/admin/dashboard">Admin Dashboard</Link>
+              </li>
+            )}
+            {isLoggedIn && role === "ADMIN" && (
+              <li>
+                <Link to="/course/create">Create Course</Link>
               </li>
             )}
             <li>
