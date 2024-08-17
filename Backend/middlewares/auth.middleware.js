@@ -16,10 +16,9 @@ const isLoggedIn = function (req, res, next) {
     return next(new AppError("Unauthenticated, please login", 401));
   }
 };
-
+// Middleware to check if user is admin or not
 const authorizeRoles =
-  (...roles) =>
-  (req, res, next) => {
+  (...roles) => async (req, res, next) => {
     const currentRole = req.user.role;
     if (!roles.includes(currentRole)) {
       return next(
