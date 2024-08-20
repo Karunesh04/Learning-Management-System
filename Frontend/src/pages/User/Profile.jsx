@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 import HomeLayout from "../../layouts/HomeLayout";
+import { getUserData } from "../../slices/authSlice";
+import { cancelCourseBundle } from "../../slices/razorPaySlice";
 function Profile() {
 
     const dispatch = useDispatch();

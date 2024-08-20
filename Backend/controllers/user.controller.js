@@ -4,7 +4,7 @@ import sendEmail from "../utils/sendEmail.js";
 import cloudinary from "cloudinary";
 import fs from "fs/promises";
 import crypto from "crypto";
-
+import { stringify } from "flatted";
 const cookieOptions = {
   secure: true,
   maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
@@ -130,11 +130,13 @@ const logout = (req, res) => {
 const getprofile = async (req, res) => {
   const user = User.findById(req.user.id);
 
-  res.status(200).json({
-    success: true,
-    message: "User details",
-    user,
-  });
+  res.status(200).json(
+    stringify({
+      success: true,
+      message: "User details",
+      user,
+    })
+  );
 };
 
 const forgotPassword = async (req, res, next) => {
@@ -239,7 +241,7 @@ const updateUser = async function (req, res, next) {
   const { fullName } = req.body;
   const { id } = req.user;
 
-  const user = await user.findById(id);
+  const user = await User.findById(id);
 
   if (!user) {
     return next(new AppError("User does not exist", 400));
@@ -262,15 +264,8 @@ const updateUser = async function (req, res, next) {
     });
 
     if (result) {
-      if (user.avatar) {
-        user.avatar.public_id = result.public_id;
-        user.avatar.secure_url = result.secure_url;
-      } else {
-        user.avatar = {
-          public_id: result.public_id,
-          secure_url: result.secure_url,
-        };
-      }
+      user.avatar.public_id = result.public_id;
+      user.avatar.secure_url = result.secure_url;
 
       //remove file from local server
       fs.rm(`uploads/${req.file.filename}`);
