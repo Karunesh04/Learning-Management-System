@@ -3,8 +3,9 @@ import toast from "react-hot-toast";
 
 import axiosInstance from "../config/axiosInstance";
 
+
 const initialState = {
-    lectures: []
+    lectures: [],
 }
 
 export const getCourseLecture = createAsyncThunk("/course/lecture/get", async (cid)=>{
@@ -15,12 +16,13 @@ export const getCourseLecture = createAsyncThunk("/course/lecture/get", async (c
             success: "Fetched course lectures!",
             error: "Failed to load the lectures!"
         });
+        return (await response).data;
     }catch(error){
         toast.error(error?.response?.data?.message);
     }
 });
 
-export const deleteCourseLecture = createAsyncThunk("/course/lecture/get", async (data)=>{
+export const deleteCourseLecture = createAsyncThunk("/course/lecture/delete", async (data)=>{
     try{
         const response = axiosInstance.delete(`/course?courseId=${data.courseId}&lectureId=${data.lectureId}`);
         toast.promise(response, {
@@ -28,6 +30,7 @@ export const deleteCourseLecture = createAsyncThunk("/course/lecture/get", async
             success: "Deleted course lecture",
             error: "Failed to delete the lecture"
         });
+        return (await response).data;
     }catch(error){
         toast.error(error?.response?.data?.message);
     }
@@ -46,6 +49,7 @@ export const addCourseLecture = createAsyncThunk("/course/lecture/add", async (d
             success: "Added course lectures!",
             error: "Failed to add the lectures!"
         });
+        return (await response).data;
     }catch(error){
         toast.error(error?.response?.data?.message);
     }
@@ -59,10 +63,10 @@ const lectureSlice = createSlice({
         builder.addCase(getCourseLecture.fulfilled, (state, action)=>{
             state.lectures = action?.payload?.lectures;
         })
-        .addCase(addCourseLecture.fulfilled, (state, action)=>{
+        builder.addCase(addCourseLecture.fulfilled, (state, action)=>{
             state.lectures = action?.payload?.lectures;
         })
-        .addCase(deleteCourseLecture.fulfilled, (state, action)=>{
+        builder.addCase(deleteCourseLecture.fulfilled, (state, action)=>{
             state.lectures = action?.payload?.course?.lectures;
         })
     }
